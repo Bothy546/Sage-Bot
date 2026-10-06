@@ -7,15 +7,6 @@ const {
 const { Boom } = require("@hapi/boom");
 const pino = require("pino");
 const handler = require("./handler");
-const readline = require("readline");
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-const question = (text) =>
-  new Promise((resolve) => rl.question(text, resolve));
 
 async function startSage() {
   const { state, saveCreds } = await useMultiFileAuthState("auth_info");
@@ -29,17 +20,27 @@ async function startSage() {
   });
 
   if (!sock.authState.creds.registered) {
-    const phoneNumber = await question(
-      "📱 Enter Your WhatsApp Number:\nExample: 263783766205\n➤ "
-    );
+    const phoneNumber = process.env.PHONE_NUMBER;
+    if (!phoneNumber) {
+      console.log("❌ Set PHONE_NUMBER in Railway Variables!");
+      console.log("Example: 263783766205");
+      return;
+    }
+    await new Promise(r => setTimeout(r, 3000));
     const code = await sock.requestPairingCode(
-      phoneNumber.trim().replace(/[^0-9]/g, "")
+      phoneNumber.replace(/[^0-9]/g, "")
     );
-    console.log(`\n🔑 YOUR PAIRING CODE: ${code}\n`);
-    console.log(`1. Open WhatsApp`);
-    console.log(`2. Settings → Linked Devices`);
-    console.log(`3. Link With Phone Number`);
-    console.log(`4. Enter Code: ${code}\n`);
+    console.log(`
+💎꧁━━━━━━━━━━━━━━━━━━━━━━━━꧂💎
+🔑 YOUR PAIRING CODE: ${code}
+💎꧁━━━━━━━━━━━━━━━━━━━━━━━━꧂💎
+
+1. Open WhatsApp
+2. Settings
+3. Linked Devices
+4. Link With Phone Number
+5. Enter Code: ${code} ✅
+    `);
   }
 
   sock.ev.on("connection.update", (update) => {
@@ -48,6 +49,7 @@ async function startSage() {
       const shouldReconnect =
         new Boom(lastDisconnect?.error)?.output?.statusCode !==
         DisconnectReason.loggedOut;
+      console.log("🔴 Connection Closed. Reconnecting...");
       if (shouldReconnect) startSage();
     } else if (connection === "open") {
       console.log(`
@@ -58,7 +60,6 @@ async function startSage() {
 🟢 Status : Online
 💎꧁━━━━━━━━━━━━━━━━━━━━━━━━꧂💎
       `);
-      rl.close();
     }
   });
 
