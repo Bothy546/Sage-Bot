@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  background: #0a0a0a;
+  color: #fff;
+  min-height: 100vh;
+}
+.panel {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ffd700;
+}
+.header h1 {
+  font-size: 20px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #00ff00;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.card {
+  background: #1a1a2e;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #333;
+}
+.card h2 {
+  color: #ffd700;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.card input {
+  width: 100%;
+  padding: 10px;
+  background: #0a0a0a;
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+}
+#pairing-code {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+  letter-spacing: 5px;
+  padding: 10px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.btn {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.start {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  color: white;
+}
+.stop {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+}
+.restart {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: black;
+}
+.btn:active { transform: scale(0.95); }
+#logs {
+  background: #0a0a0a;
+  border-radius: 8px;
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 13px;
+}
+#logs p {
+  padding: 5px 0;
+  border-bottom: 1px solid #222;
+  color: #00ff00;
+
+}
