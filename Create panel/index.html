@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAGE BOT MANAGER</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="panel">
+    <div class="header">
+      <h1>⚡ SAGE BOT MANAGER ⚡</h1>
+      <div class="status">
+        <span class="dot"></span>
+        <span id="status-text">Ready</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>📱 Phone Number</h2>
+      <input type="text" id="phone"
+        placeholder="263783766205"
+        value="263783766205"/>
+    </div>
+    <div class="card">
+      <h2>🔑 Pairing Code</h2>
+      <div id="pairing-code">Waiting...</div>
+    </div>
+    <div class="buttons">
+      <button class="btn start" onclick="startBot()">
+        ▶️ START BOT
+      </button>
+      <button class="btn stop" onclick="stopBot()">
+        ⏹️ STOP BOT
+      </button>
+      <button class="btn restart" onclick="restartBot()">
+        🔄 RESTART
+      </button>
+    </div>
+    <div class="card">
+      <h2>📋 LOGS</h2>
+      <div id="logs">
+        <p>✅ Panel Loaded!</p>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
